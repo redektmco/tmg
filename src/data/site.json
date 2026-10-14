@@ -1,0 +1,205 @@
+{
+  "_leia-me": "Este é o único arquivo que você precisa editar para trocar textos, telefone e fotos do site. Mude só o que está entre aspas do lado direito dos dois pontos. Veja o guia COMO-EDITAR.md na raiz do projeto.",
+
+  "empresa": {
+    "nome": "TMG Distribuidora",
+    "nomeCompleto": "TMG Distribuidora de Águas e Bebidas",
+    "whatsapp": "5511961552182",
+    "whatsappExibicao": "(11) 96155-2182",
+    "contato": "Rodrigo",
+    "instagram": "tmg.distribuidora",
+    "cidade": "São Paulo",
+    "estado": "SP",
+    "_cnpj-e-endereco": "A CONFIRMAR. Enquanto estiverem vazios, não aparecem no site.",
+    "cnpj": "",
+    "endereco": "",
+    "_logo": "Nome do arquivo do logo dentro de src/assets/marca/. Deixe vazio para usar o logo em texto.",
+    "logo": ""
+  },
+
+  "seo": {
+    "url": "https://tmg-distribuidora.vercel.app",
+    "titulo": "TMG Distribuidora | Água Mineral e Coca-Cola para comércios em SP",
+    "descricao": "Distribuidora de Água Mineral Premium Lindoia e Coca-Cola para bares, restaurantes, padarias e eventos em São Paulo. Faça seu pedido pelo WhatsApp.",
+    "imagemCompartilhamento": "/og.jpg"
+  },
+
+  "mensagens": {
+    "_explicacao": "Textos que já chegam escritos no WhatsApp quando a pessoa clica nos botões.",
+    "padrao": "Olá, TMG! Quero fazer um pedido.",
+    "assinatura": "(Mensagem enviada pelo site)"
+  },
+
+  "header": {
+    "botao": "Pedir no WhatsApp"
+  },
+
+  "hero": {
+    "etiqueta": "Distribuidora de bebidas em SP",
+    "titulo": "Água e Coca-Cola no estoque do seu comércio, no dia combinado.",
+    "subtitulo": "A TMG distribui Água Mineral Premium Lindoia e Coca-Cola para bares, restaurantes, padarias e centros de eventos em São Paulo. Chame no WhatsApp e faça seu pedido direto com o Rodrigo.",
+    "botaoPrincipal": "Pedir no WhatsApp",
+    "botaoSecundario": "Como funciona"
+  },
+
+  "segmentos": {
+    "faixa": ["Bares", "Restaurantes", "Padarias", "Centros de eventos"],
+    "titulo": "Feito para o seu tipo de comércio",
+    "subtitulo": "Cada balcão tem um giro diferente. Veja o que combina com o seu.",
+    "itens": [
+      {
+        "nome": "Bares",
+        "icone": "bar",
+        "texto": "Água com gás, lata e Coca-Cola girando rápido no balcão.",
+        "sugestao": "Água com gás e Coca-Cola lata",
+        "botao": "Pedir para o meu bar",
+        "mensagem": "Olá, TMG! Tenho um bar e quero fazer um pedido."
+      },
+      {
+        "nome": "Restaurantes",
+        "icone": "restaurante",
+        "texto": "Água com e sem gás para servir na mesa.",
+        "sugestao": "Água Premium Lindoia com e sem gás",
+        "botao": "Pedir para o meu restaurante",
+        "mensagem": "Olá, TMG! Tenho um restaurante e quero fazer um pedido."
+      },
+      {
+        "nome": "Padarias",
+        "icone": "padaria",
+        "texto": "Garrafinhas e latas para a geladeira do caixa.",
+        "sugestao": "Garrafinhas de água e Coca-Cola lata",
+        "botao": "Pedir para a minha padaria",
+        "mensagem": "Olá, TMG! Tenho uma padaria e quero fazer um pedido."
+      },
+      {
+        "nome": "Centros de eventos",
+        "icone": "eventos",
+        "texto": "Copos, garrafas e latas em volume para o evento inteiro.",
+        "sugestao": "Copos de água, garrafas e latas",
+        "botao": "Pedir para o meu evento",
+        "mensagem": "Olá, TMG! Quero fazer um pedido para um evento."
+      }
+    ]
+  },
+
+  "comoFunciona": {
+    "titulo": "Como funciona",
+    "subtitulo": "Do WhatsApp ao seu estoque em três passos.",
+    "passos": [
+      {
+        "titulo": "Chame no WhatsApp",
+        "texto": "Um toque no botão e a conversa abre com a mensagem pronta."
+      },
+      {
+        "titulo": "Passe seu pedido",
+        "texto": "Diga o que precisa e em que quantidade. O Rodrigo responde com o orçamento."
+      },
+      {
+        "titulo": "Receba no seu comércio",
+        "texto": "No dia combinado com o Rodrigo."
+      }
+    ],
+    "foto": "van-frente.jpg",
+    "fotoAlt": "Van de entregas da TMG estacionada",
+    "fotoSelo": "Entrega no dia combinado",
+    "botao": "Chamar no WhatsApp"
+  },
+
+  "porQue": {
+    "titulo": "Por que a TMG",
+    "subtitulo": "Qualidade, pontualidade e compromisso com o seu negócio.",
+    "pilares": [
+      {
+        "titulo": "Qualidade",
+        "texto": "Água Mineral Premium Lindoia e Coca-Cola, direto para o seu estoque."
+      },
+      {
+        "titulo": "Pontualidade",
+        "texto": "Entrega no dia combinado."
+      },
+      {
+        "titulo": "Compromisso",
+        "texto": "Um contato direto que responde: fale com o Rodrigo."
+      }
+    ],
+    "fotos": [
+      { "arquivo": "estoque-agua.jpg", "alt": "Estoque da TMG com fardos de Água Mineral Premium" },
+      { "arquivo": "van-coca-cola.jpg", "alt": "Van da TMG carregada com fardos de Coca-Cola em lata" }
+    ],
+    "_numeros": "Contadores animados. A CONFIRMAR: só aparecem se mostrar for true e houver números reais do cliente.",
+    "numeros": {
+      "mostrar": false,
+      "itens": [
+        { "valor": 0, "sufixo": "", "rotulo": "anos de mercado" }
+      ]
+    }
+  },
+
+  "origem": {
+    "_mostrar": "A CONFIRMAR com o cliente ou fabricante. Mude para false para esconder a seção.",
+    "mostrar": true,
+    "etiqueta": "De onde vem a água",
+    "titulo": "Desça até a fonte",
+    "superficie": "Superfície",
+    "profundidade": 150,
+    "texto": "A Premium Lindoia vem de um poço artesiano de 150 metros, em Águas de Lindoia (SP)."
+  },
+
+  "provaSocial": {
+    "_mostrar": "A CONFIRMAR. Só mude para true quando o cliente enviar depoimentos reais. Nunca invente.",
+    "mostrar": false,
+    "titulo": "Quem já recebe da TMG",
+    "depoimentos": [
+      { "texto": "", "nome": "", "comercio": "" }
+    ]
+  },
+
+  "faq": {
+    "titulo": "Perguntas frequentes",
+    "_respostaPadrao": "Aparece em toda pergunta que ainda está sem resposta (resposta vazia).",
+    "respostaPadrao": "Chama no WhatsApp que a gente te responde na hora.",
+    "botao": "Perguntar no WhatsApp",
+    "perguntas": [
+      { "pergunta": "Qual o pedido mínimo?", "resposta": "" },
+      { "pergunta": "Quais regiões de São Paulo vocês atendem?", "resposta": "" },
+      { "pergunta": "Em quanto tempo a entrega chega?", "resposta": "" },
+      { "pergunta": "Quais as formas de pagamento?", "resposta": "" },
+      { "pergunta": "Vocês atendem eventos pontuais?", "resposta": "" }
+    ]
+  },
+
+  "galeria": {
+    "titulo": "Nossa operação",
+    "texto": "Fotos reais do nosso estoque e das nossas entregas.",
+    "fotos": [
+      { "arquivo": "van-agua.jpg", "alt": "Van da TMG carregada com fardos de água mineral" },
+      { "arquivo": "van-coca-cola.jpg", "alt": "Van da TMG carregada com fardos de Coca-Cola em lata" },
+      { "arquivo": "estoque-agua.jpg", "alt": "Estoque da TMG com fardos de Água Mineral Premium" },
+      { "arquivo": "van-frente.jpg", "alt": "Van de entregas da TMG vista de frente" },
+      { "arquivo": "van-lateral.jpg", "alt": "Van de entregas da TMG vista de lado" }
+    ]
+  },
+
+  "ctaFinal": {
+    "titulo": "Seu estoque abastecido sem sair do balcão.",
+    "texto": "Chame no WhatsApp e combine o pedido direto com o Rodrigo.",
+    "botaoPrincipal": "Falar com o Rodrigo no WhatsApp",
+    "botaoSecundario": "Ver o Instagram"
+  },
+
+  "rodape": {
+    "avisoMarcas": "Coca-Cola e Premium Lindoia são marcas de seus respectivos proprietários."
+  },
+
+  "cookies": {
+    "texto": "Usamos cookies para medir as visitas e melhorar nossos anúncios.",
+    "aceitar": "Aceitar",
+    "recusar": "Recusar"
+  },
+
+  "rastreamento": {
+    "_explicacao": "Cole aqui os códigos do Google Analytics 4 (ex.: G-XXXXXXX) e do Meta Pixel (só números). Vazio = desligado. O aviso de cookies só aparece quando algum código estiver preenchido.",
+    "ga4": "",
+    "metaPixel": ""
+  }
+}

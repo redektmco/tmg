@@ -1,0 +1,113 @@
+---
+import '../styles/global.css';
+import fonteTitulo from '@fontsource/sora/files/sora-latin-800-normal.woff2?url';
+import fonteTexto from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
+import { linkInstagram, site } from '../lib/site';
+
+const { seo, empresa, mensagens, rastreamento } = site;
+const urlCanonica = new URL(Astro.url.pathname, Astro.site ?? seo.url).href;
+const imagemCompartilhamento = new URL(seo.imagemCompartilhamento, Astro.site ?? seo.url).href;
+
+const config = {
+  whatsapp: empresa.whatsapp,
+  mensagemPadrao: mensagens.padrao,
+  assinatura: mensagens.assinatura,
+  ga4: rastreamento.ga4.trim(),
+  metaPixel: rastreamento.metaPixel.trim(),
+};
+
+const negocioLocal = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: empresa.nomeCompleto,
+  alternateName: empresa.nome,
+  description: seo.descricao,
+  url: seo.url,
+  image: imagemCompartilhamento,
+  telephone: `+${empresa.whatsapp}`,
+  areaServed: { '@type': 'City', name: empresa.cidade },
+  sameAs: [linkInstagram],
+  ...(empresa.endereco
+    ? {
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: empresa.endereco,
+          addressLocality: empresa.cidade,
+          addressRegion: empresa.estado,
+          addressCountry: 'BR',
+        },
+      }
+    : {}),
+  ...(empresa.cnpj ? { taxID: empresa.cnpj } : {}),
+};
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{seo.titulo}</title>
+    <meta name="description" content={seo.descricao} />
+    <link rel="canonical" href={urlCanonica} />
+    <meta name="theme-color" content="#0b2e6f" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={empresa.nome} />
+    <meta property="og:title" content={seo.titulo} />
+    <meta property="og:description" content={seo.descricao} />
+    <meta property="og:url" content={urlCanonica} />
+    <meta property="og:image" content={imagemCompartilhamento} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={empresa.nomeCompleto} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preload" href={fonteTitulo} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={fonteTexto} as="font" type="font/woff2" crossorigin />
+
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        try {
+          if (sessionStorage.getItem('tmg-preloader')) d.classList.add('sem-preloader');
+          else sessionStorage.setItem('tmg-preloader', '1');
+        } catch (e) {}
+      })();
+    </script>
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(negocioLocal)} />
+  </head>
+  <body>
+    <a href="#conteudo" class="pular-para-conteudo">Pular para o conteúdo</a>
+    <slot />
+    <script is:inline type="application/json" id="config-site" set:html={JSON.stringify(config)} />
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  .pular-para-conteudo {
+    position: fixed;
+    left: 12px;
+    top: 12px;
+    transform: translateY(-200%);
+    z-index: 200;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: #fff;
+    color: var(--color-azul-profundo);
+    font-weight: 700;
+  }
+
+  .pular-para-conteudo:focus {
+    transform: none;
+  }
+</style>

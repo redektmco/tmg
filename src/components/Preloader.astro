@@ -1,0 +1,121 @@
+---
+import Logo from './Logo.astro';
+---
+
+<div class="preloader" aria-hidden="true">
+  <div class="preloader__palco">
+    <span class="preloader__gota"></span>
+    <span class="preloader__anel"></span>
+    <span class="preloader__anel preloader__anel--2"></span>
+    <div class="preloader__logo">
+      <Logo tamanho="grande" prioridade />
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Some sozinho em 1,2 s, mesmo sem JavaScript. */
+  .preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(120% 80% at 50% 40%, #ffffff 0%, var(--color-gelo) 70%);
+    animation: preloader-sai 0.35s 0.85s var(--ease-agua) forwards;
+    pointer-events: none;
+  }
+
+  :global(html.sem-preloader) .preloader {
+    display: none;
+  }
+
+  .preloader__palco {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    display: grid;
+    place-items: center;
+  }
+
+  .preloader__gota {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 18px;
+    height: 24px;
+    margin: -12px 0 0 -9px;
+    background: linear-gradient(180deg, #7fe0ea, #1660d0);
+    border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+    clip-path: path('M9 0C9 0 18 10.5 18 15.5A9 9 0 0 1 0 15.5C0 10.5 9 0 9 0Z');
+    transform: translate3d(0, -46vh, 0);
+    animation: gota-cai 0.42s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+  }
+
+  .preloader__anel {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 220px;
+    height: 220px;
+    margin: -110px 0 0 -110px;
+    border-radius: 50%;
+    border: 2px solid var(--color-turquesa);
+    opacity: 0;
+    transform: scale(0.05);
+    animation: anel 0.7s 0.4s var(--ease-agua) forwards;
+  }
+
+  .preloader__anel--2 {
+    animation-delay: 0.5s;
+    border-color: var(--color-azul-tmg);
+  }
+
+  .preloader__logo {
+    opacity: 0;
+    transform: scale(0.6);
+    animation: logo-surge 0.45s 0.42s var(--ease-agua) forwards;
+  }
+
+  @keyframes gota-cai {
+    80% {
+      transform: translate3d(0, 0, 0) scale(1, 1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale(2.2, 0.2);
+      opacity: 0;
+    }
+  }
+
+  @keyframes anel {
+    0% {
+      opacity: 0.9;
+      transform: scale(0.05);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.4);
+    }
+  }
+
+  @keyframes logo-surge {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes preloader-sai {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .preloader {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,172 @@
+---
+import { Picture } from 'astro:assets';
+import Icone from './Icone.astro';
+import { foto, site } from '../lib/site';
+
+const { galeria } = site;
+---
+
+<section id="operacao" class="secao galeria" aria-labelledby="galeria-titulo">
+  <div class="container-site galeria__topo">
+    <div class="max-w-xl">
+      <h2 id="galeria-titulo" class="titulo-secao" data-split>{galeria.titulo}</h2>
+      <p class="mt-4 text-lg text-tinta-suave" data-revela>{galeria.texto}</p>
+    </div>
+    <div class="galeria__setas">
+      <button type="button" class="galeria__seta" data-galeria-seta="-1" aria-label="Ver fotos anteriores">
+        <Icone nome="seta-esquerda" tamanho={22} />
+      </button>
+      <button type="button" class="galeria__seta" data-galeria-seta="1" aria-label="Ver próximas fotos">
+        <Icone nome="seta" tamanho={22} />
+      </button>
+    </div>
+  </div>
+
+  <ul class="galeria__trilho" data-galeria tabindex="0" aria-label="Fotos da operação. Arraste para o lado para ver mais.">
+    {
+      galeria.fotos.map((item, i) => (
+        <li class:list={['galeria__item', { 'galeria__item--baixo': i % 2 === 1 }]}>
+          <figure>
+            <Picture
+              src={foto(item.arquivo)}
+              alt={item.alt}
+              formats={['avif', 'webp']}
+              widths={[320, 480, 640, 800]}
+              sizes="(min-width: 1024px) 340px, (min-width: 640px) 44vw, 76vw"
+              loading="lazy"
+              decoding="async"
+              draggable="false"
+            />
+            <figcaption>{item.alt}</figcaption>
+          </figure>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .galeria {
+    background: var(--color-gelo);
+    padding-bottom: 96px;
+  }
+
+  .galeria__topo {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .galeria__setas {
+    display: none;
+    gap: 10px;
+  }
+
+  .galeria__seta {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    color: var(--color-azul-profundo);
+    background: #fff;
+    box-shadow: 0 10px 24px -14px rgb(11 46 111 / 0.6);
+    transition:
+      transform 0.3s var(--ease-agua),
+      background-color 0.2s;
+    cursor: pointer;
+  }
+
+  .galeria__seta:hover {
+    background: var(--color-azul-tmg);
+    color: #fff;
+    transform: scale(1.06);
+  }
+
+  .galeria__trilho {
+    display: flex;
+    gap: 16px;
+    margin-top: 36px;
+    padding: 12px 20px 40px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 20px;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    cursor: grab;
+  }
+
+  .galeria__trilho::-webkit-scrollbar {
+    display: none;
+  }
+
+  .galeria__trilho.arrastando {
+    cursor: grabbing;
+    scroll-snap-type: none;
+  }
+
+  .galeria__item {
+    flex: 0 0 76%;
+    max-width: 340px;
+    scroll-snap-align: start;
+  }
+
+  .galeria__item--baixo {
+    margin-top: 28px;
+  }
+
+  .galeria__item figure {
+    position: relative;
+    margin: 0;
+    aspect-ratio: 3 / 4;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #cfe9f1;
+    box-shadow: 0 24px 50px -30px rgb(11 46 111 / 0.6);
+  }
+
+  .galeria__item :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-drag: none;
+    transition: transform 0.8s var(--ease-agua);
+  }
+
+  .galeria__item figure:hover :global(img) {
+    transform: scale(1.04);
+  }
+
+  .galeria__item figcaption {
+    position: absolute;
+    inset: auto 0 0;
+    padding: 40px 16px 16px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #fff;
+    background: linear-gradient(180deg, transparent, rgb(6 26 66 / 0.75));
+  }
+
+  @media (min-width: 640px) {
+    .galeria__item {
+      flex-basis: 44%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .galeria__setas {
+      display: flex;
+    }
+
+    .galeria__trilho {
+      padding-inline: max(32px, calc((100vw - 1200px) / 2 + 32px));
+      scroll-padding-inline: max(32px, calc((100vw - 1200px) / 2 + 32px));
+    }
+
+    .galeria__item {
+      flex-basis: 340px;
+    }
+  }
+</style>

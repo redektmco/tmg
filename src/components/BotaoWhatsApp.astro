@@ -1,0 +1,28 @@
+---
+import Icone from './Icone.astro';
+import { linkWhatsApp, site } from '../lib/site';
+
+interface Props {
+  /** De onde veio o clique (vai para o GA4/Pixel). Ex.: hero, flutuante, rodape, faq. */
+  origem: string;
+  texto: string;
+  mensagem?: string;
+  class?: string;
+  magnetico?: boolean;
+}
+
+const { origem, texto, mensagem = site.mensagens.padrao, class: classe = '', magnetico = true } = Astro.props;
+---
+
+<a
+  href={linkWhatsApp(mensagem)}
+  target="_blank"
+  rel="noopener"
+  class:list={['botao botao-whatsapp', classe]}
+  data-wa={origem}
+  data-wa-msg={mensagem}
+  data-magnetico={magnetico ? '' : undefined}
+>
+  <Icone nome="whatsapp" tamanho={22} />
+  <span>{texto}</span>
+</a>

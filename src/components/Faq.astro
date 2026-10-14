@@ -1,0 +1,167 @@
+---
+import Icone from './Icone.astro';
+import Onda from './Onda.astro';
+import { linkWhatsApp, site } from '../lib/site';
+
+const { faq } = site;
+---
+
+<section id="perguntas" class="secao faq" aria-labelledby="faq-titulo">
+  <div class="container-site faq__grade">
+    <div>
+      <h2 id="faq-titulo" class="titulo-secao" data-split>{faq.titulo}</h2>
+    </div>
+
+    <div class="faq__lista">
+      {
+        faq.perguntas.map((item) => {
+          const mensagem = `Olá, TMG! ${item.pergunta}`;
+          return (
+            <details class="pergunta" data-revela>
+              <summary class="pergunta__titulo">
+                <span>{item.pergunta}</span>
+                <span class="pergunta__icone" aria-hidden="true">
+                  <Icone nome="mais" tamanho={20} />
+                </span>
+              </summary>
+              <div class="pergunta__resposta">
+                <p>{item.resposta.trim() || faq.respostaPadrao}</p>
+                <a
+                  href={linkWhatsApp(mensagem)}
+                  target="_blank"
+                  rel="noopener"
+                  class="pergunta__link"
+                  data-wa="faq"
+                  data-wa-msg={mensagem}
+                >
+                  <Icone nome="whatsapp" tamanho={18} />
+                  {faq.botao}
+                </a>
+              </div>
+            </details>
+          );
+        })
+      }
+    </div>
+  </div>
+
+  <Onda cor="var(--color-gelo)" />
+</section>
+
+<style>
+  .faq {
+    position: relative;
+    background: #fff;
+    padding-bottom: 128px;
+  }
+
+  .faq__grade {
+    display: grid;
+    gap: 32px;
+  }
+
+  .faq__lista {
+    display: grid;
+    gap: 12px;
+  }
+
+  .pergunta {
+    border-radius: 20px;
+    background: var(--color-gelo);
+    transition: background-color 0.3s ease;
+    interpolate-size: allow-keywords;
+  }
+
+  .pergunta[open] {
+    background: #fff;
+    box-shadow:
+      inset 0 0 0 1.5px rgb(22 96 208 / 0.18),
+      0 20px 40px -30px rgb(11 46 111 / 0.5);
+  }
+
+  .pergunta::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition:
+      block-size 0.4s var(--ease-agua),
+      content-visibility 0.4s allow-discrete;
+  }
+
+  .pergunta[open]::details-content {
+    block-size: auto;
+  }
+
+  .pergunta__titulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 64px;
+    padding: 16px 20px;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-titulo);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    line-height: 1.3;
+    color: var(--color-azul-profundo);
+  }
+
+  .pergunta__titulo::-webkit-details-marker {
+    display: none;
+  }
+
+  .pergunta__icone {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: #fff;
+    background: var(--color-azul-tmg);
+    transition: transform 0.4s var(--ease-agua);
+  }
+
+  .pergunta[open] .pergunta__icone {
+    transform: rotate(45deg);
+  }
+
+  .pergunta__resposta {
+    padding: 0 20px 20px;
+    color: var(--color-tinta-suave);
+  }
+
+  .pergunta__link {
+    margin-top: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    font-family: var(--font-titulo);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--color-verde-whatsapp-escuro);
+  }
+
+  .pergunta__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  @media (min-width: 1024px) {
+    .faq__grade {
+      grid-template-columns: 4fr 7fr;
+      gap: 80px;
+    }
+
+    .pergunta__titulo {
+      font-size: 1.1875rem;
+      padding: 20px 24px;
+    }
+
+    .pergunta__resposta {
+      padding: 0 24px 24px;
+    }
+  }
+</style>

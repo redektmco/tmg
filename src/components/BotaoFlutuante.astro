@@ -1,0 +1,75 @@
+---
+import Icone from './Icone.astro';
+import { linkWhatsApp, site } from '../lib/site';
+---
+
+<a
+  href={linkWhatsApp()}
+  target="_blank"
+  rel="noopener"
+  class="flutuante"
+  aria-label="Pedir no WhatsApp"
+  data-wa="flutuante"
+  data-wa-msg={site.mensagens.padrao}
+  data-flutuante
+>
+  <span class="flutuante__pulso" aria-hidden="true"></span>
+  <Icone nome="whatsapp" tamanho={30} />
+</a>
+
+<style>
+  .flutuante {
+    position: fixed;
+    right: 16px;
+    bottom: calc(16px + var(--safe-bottom));
+    z-index: 40;
+    display: grid;
+    place-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: #fff;
+    background: var(--color-verde-whatsapp);
+    box-shadow: 0 14px 30px -10px rgb(18 140 75 / 0.75);
+    transition:
+      transform 0.45s var(--ease-agua),
+      opacity 0.3s ease;
+  }
+
+  .flutuante:hover {
+    transform: scale(1.06);
+  }
+
+  :global(.flutuante.flutuante--oculto) {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0) scale(0.8);
+    pointer-events: none;
+  }
+
+  .flutuante__pulso {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--color-verde-whatsapp);
+    animation: pulso 2.4s var(--ease-agua) infinite;
+  }
+
+  @keyframes pulso {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    70%,
+    100% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .flutuante {
+      right: 28px;
+      bottom: calc(28px + var(--safe-bottom));
+    }
+  }
+</style>

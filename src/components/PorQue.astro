@@ -1,0 +1,217 @@
+---
+import { Picture } from 'astro:assets';
+import Icone from './Icone.astro';
+import Onda from './Onda.astro';
+import { foto, semQuebra, site } from '../lib/site';
+
+const { porQue } = site;
+const icones = ['gota', 'calendario', 'conversa'];
+const numeros = porQue.numeros.mostrar ? porQue.numeros.itens.filter((n) => n.valor > 0) : [];
+---
+
+<section id="por-que" class="secao por-que" aria-labelledby="por-que-titulo">
+  <div class="container-site por-que__grade">
+    <div class="por-que__fotos" aria-hidden="false">
+      {
+        porQue.fotos.map((item, i) => (
+          <figure class:list={['por-que__foto', `por-que__foto--${i + 1}`]} data-parallax={i === 0 ? '-6' : '10'}>
+            <Picture
+              src={foto(item.arquivo)}
+              alt={item.alt}
+              formats={['avif', 'webp']}
+              widths={[320, 480, 640, 900]}
+              sizes={i === 0 ? '(min-width: 1024px) 400px, 68vw' : '(min-width: 1024px) 300px, 50vw'}
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        ))
+      }
+      <span class="por-que__bolha por-que__bolha--1" aria-hidden="true"></span>
+      <span class="por-que__bolha por-que__bolha--2" aria-hidden="true"></span>
+    </div>
+
+    <div>
+      <h2 id="por-que-titulo" class="titulo-secao" data-split>{porQue.titulo}</h2>
+      <p class="mt-4 text-lg text-tinta-suave" data-revela>{porQue.subtitulo}</p>
+
+      <ul class="pilares">
+        {
+          porQue.pilares.map((pilar, i) => (
+            <li class="pilar" data-revela>
+              <span class="pilar__icone">
+                <Icone nome={icones[i] ?? 'gota'} tamanho={26} />
+              </span>
+              <div>
+                <h3 class="pilar__titulo">{pilar.titulo}</h3>
+                <p class="pilar__texto" set:html={semQuebra(pilar.texto)} />
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      {
+        numeros.length > 0 && (
+          <dl class="numeros">
+            {numeros.map((n) => (
+              <div class="numero" data-revela>
+                <dt class="numero__rotulo">{n.rotulo}</dt>
+                <dd class="numero__valor">
+                  <span data-contador={n.valor}>{n.valor}</span>
+                  {n.sufixo}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .por-que {
+    position: relative;
+    background: var(--color-gelo);
+    padding-bottom: 96px;
+  }
+
+  .por-que__grade {
+    display: grid;
+    gap: 56px;
+  }
+
+  .por-que__fotos {
+    position: relative;
+    min-height: 420px;
+    order: 2;
+  }
+
+  .por-que__foto {
+    position: absolute;
+    margin: 0;
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -28px rgb(11 46 111 / 0.6);
+    border: 6px solid #fff;
+  }
+
+  .por-que__foto :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .por-que__foto--1 {
+    left: 0;
+    top: 0;
+    width: 68%;
+    aspect-ratio: 3 / 4;
+    transform: rotate(-3deg);
+  }
+
+  .por-que__foto--2 {
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    aspect-ratio: 3 / 4;
+    transform: rotate(4deg);
+    z-index: 1;
+  }
+
+  .por-que__bolha {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgb(255 255 255 / 0.95), rgb(127 224 234 / 0.35) 45%, rgb(22 96 208 / 0.15) 70%);
+    box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.7);
+  }
+
+  .por-que__bolha--1 {
+    width: 64px;
+    height: 64px;
+    right: 18%;
+    top: 6%;
+  }
+
+  .por-que__bolha--2 {
+    width: 32px;
+    height: 32px;
+    left: 6%;
+    bottom: 12%;
+    z-index: 2;
+  }
+
+  .pilares {
+    margin-top: 36px;
+    display: grid;
+    gap: 16px;
+  }
+
+  .pilar {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    padding: 20px;
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 18px 40px -30px rgb(11 46 111 / 0.5);
+  }
+
+  .pilar__icone {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    color: var(--color-azul-tmg);
+    background: var(--color-gelo);
+  }
+
+  .pilar__titulo {
+    font-size: 1.25rem;
+    color: var(--color-azul-profundo);
+  }
+
+  .pilar__texto {
+    margin-top: 4px;
+    color: var(--color-tinta-suave);
+  }
+
+  .numeros {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+  }
+
+  .numero {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .numero__valor {
+    font-family: var(--font-titulo);
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: var(--color-azul-tmg);
+  }
+
+  .numero__rotulo {
+    color: var(--color-tinta-suave);
+  }
+
+  @media (min-width: 1024px) {
+    .por-que__grade {
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .por-que__fotos {
+      order: 0;
+      min-height: 600px;
+    }
+  }
+</style>

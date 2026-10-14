@@ -1,0 +1,80 @@
+---
+import BotaoWhatsApp from './BotaoWhatsApp.astro';
+import Icone from './Icone.astro';
+import Onda from './Onda.astro';
+import { linkInstagram, site } from '../lib/site';
+
+const { ctaFinal } = site;
+---
+
+<section id="contato" class="cta-final" aria-labelledby="cta-titulo">
+  <Onda cor="var(--color-gelo)" posicao="topo" />
+  <canvas class="cta-final__bolhas" data-bolhas="cta" aria-hidden="true"></canvas>
+  <div class="container-site cta-final__conteudo">
+    <h2 id="cta-titulo" class="cta-final__titulo" data-split>{ctaFinal.titulo}</h2>
+    <p class="cta-final__texto" data-revela>{ctaFinal.texto}</p>
+    <div class="cta-final__botoes" data-revela>
+      <BotaoWhatsApp origem="cta-final" texto={ctaFinal.botaoPrincipal} class="w-full sm:w-auto" />
+      <a href={linkInstagram} target="_blank" rel="noopener" class="botao botao-claro w-full sm:w-auto" data-magnetico data-instagram="cta-final">
+        <Icone nome="instagram" tamanho={20} />
+        <span>{ctaFinal.botaoSecundario}</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-final {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    color: #fff;
+    background:
+      radial-gradient(70% 60% at 50% 110%, rgb(25 181 200 / 0.45), transparent 70%),
+      linear-gradient(180deg, var(--color-azul-profundo), var(--color-azul-noite));
+    padding-block: 160px 120px;
+    text-align: center;
+  }
+
+  .cta-final__bolhas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .cta-final__conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-final__titulo {
+    max-width: 16ch;
+    font-size: clamp(2.25rem, 9vw, 4.5rem);
+  }
+
+  .cta-final__texto {
+    margin-top: 20px;
+    max-width: 32rem;
+    font-size: 1.125rem;
+    color: rgb(255 255 255 / 0.85);
+  }
+
+  .cta-final__botoes {
+    margin-top: 36px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  @media (min-width: 640px) {
+    .cta-final__botoes {
+      width: auto;
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+</style>

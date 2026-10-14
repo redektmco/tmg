@@ -1,0 +1,68 @@
+---
+interface Props {
+  nome: string;
+  tamanho?: number;
+  class?: string;
+}
+
+const { nome, tamanho = 24, class: classe } = Astro.props;
+
+const contornos: Record<string, string> = {
+  bar: '<path d="M6 4h12l-1.4 14.3a2 2 0 0 1-2 1.7H9.4a2 2 0 0 1-2-1.7L6 4Z"/><path d="M6.7 10.5h10.6"/><path d="m14.5 2-1.8 8.5"/><rect x="9" y="12.5" width="3.2" height="3.2" rx=".8"/>',
+  restaurante:
+    '<path d="M4 3v6a3 3 0 0 0 3 3v9"/><path d="M10 3v6a3 3 0 0 1-3 3"/><path d="M7 3v5"/><path d="M20 15V3c-2.8 0-4.5 2.6-4.5 6v4.5a1.5 1.5 0 0 0 1.5 1.5H20Zm0 0v6"/>',
+  padaria:
+    '<path d="M5 11.5A4.2 4.2 0 0 1 7.2 4h9.6A4.2 4.2 0 0 1 19 11.5V19a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-7.5Z"/><path d="m9.5 7.5-1 3"/><path d="m13 7.5-1 3"/><path d="m16.5 7.5-1 3"/>',
+  eventos:
+    '<path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3a2 2 0 0 0 0-4V7Z"/><path d="M14 5v2"/><path d="M14 11v2"/><path d="M14 17v2"/>',
+  gota: '<path d="M12 2.8s6.5 7 6.5 11.7A6.5 6.5 0 0 1 12 21a6.5 6.5 0 0 1-6.5-6.5C5.5 9.8 12 2.8 12 2.8Z"/><path d="M9 14.5a3 3 0 0 0 3 3"/>',
+  calendario:
+    '<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="m9 15 2 2 4-4"/>',
+  conversa:
+    '<path d="M20.5 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 20.5 12Z"/><path d="M8.5 12h.01"/><path d="M12 12h.01"/><path d="M15.5 12h.01"/>',
+  seta: '<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>',
+  'seta-esquerda': '<path d="M19 12H5"/><path d="m11 6-6 6 6 6"/>',
+  'seta-baixo': '<path d="M12 5v14"/><path d="m6 13 6 6 6-6"/>',
+  mais: '<path d="M12 5v14"/><path d="M5 12h14"/>',
+  instagram:
+    '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/>',
+};
+
+const preenchidos: Record<string, string> = {
+  whatsapp:
+    '<path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01Zm-7.01 15.24a8.23 8.23 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.23 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18s-.22-.16-.47-.28Z"/>',
+};
+
+const ehPreenchido = nome in preenchidos;
+const conteudo = ehPreenchido ? preenchidos[nome] : contornos[nome];
+---
+
+{
+  ehPreenchido ? (
+    <svg
+      class={classe}
+      width={tamanho}
+      height={tamanho}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      focusable="false"
+      set:html={conteudo}
+    />
+  ) : (
+    <svg
+      class={classe}
+      width={tamanho}
+      height={tamanho}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.8"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      focusable="false"
+      set:html={conteudo}
+    />
+  )
+}

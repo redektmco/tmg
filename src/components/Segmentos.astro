@@ -1,0 +1,224 @@
+---
+import BotaoWhatsApp from './BotaoWhatsApp.astro';
+import Icone from './Icone.astro';
+import Onda from './Onda.astro';
+import { semQuebra, site } from '../lib/site';
+
+const { segmentos } = site;
+---
+
+<section id="segmentos" class="secao segmentos" aria-labelledby="segmentos-titulo">
+  <div class="container-site">
+    <div class="max-w-2xl">
+      <h2 id="segmentos-titulo" class="titulo-secao" data-split>{segmentos.titulo}</h2>
+      <p class="mt-4 text-lg text-tinta-suave" data-revela>{segmentos.subtitulo}</p>
+    </div>
+  </div>
+
+  <div class="segmentos__lista" data-carrossel>
+    {
+      segmentos.itens.map((item, i) => (
+        <article class="card-segmento" data-tilt data-revela>
+          <div class="card-segmento__brilho" aria-hidden="true" />
+          <span class="card-segmento__numero" aria-hidden="true">
+            0{i + 1}
+          </span>
+          <span class="card-segmento__icone">
+            <Icone nome={item.icone} tamanho={30} />
+          </span>
+          <h3 class="card-segmento__nome">{item.nome}</h3>
+          <p class="card-segmento__texto" set:html={semQuebra(item.texto)} />
+          <p class="card-segmento__sugestao">
+            <span>Sugestão</span>
+            <Fragment set:html={semQuebra(item.sugestao)} />
+          </p>
+          <BotaoWhatsApp
+            origem={`segmento-${item.icone}`}
+            texto={item.botao}
+            mensagem={item.mensagem}
+            class="card-segmento__botao"
+            magnetico={false}
+          />
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="segmentos__pontos" aria-hidden="true" data-carrossel-pontos>
+    {segmentos.itens.map((_, i) => <span class:list={{ ativo: i === 0 }} />)}
+  </div>
+
+  <Onda cor="#ffffff" />
+</section>
+
+<style>
+  .segmentos {
+    position: relative;
+    background: var(--color-gelo);
+    padding-top: 48px;
+    padding-bottom: 96px;
+  }
+
+  .segmentos__lista {
+    display: flex;
+    gap: 16px;
+    margin-top: 36px;
+    padding: 8px 20px 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 20px;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .segmentos__lista::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card-segmento {
+    position: relative;
+    flex: 0 0 86%;
+    max-width: 340px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 24px 24px;
+    border-radius: 28px;
+    background: #fff;
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 0.8) inset,
+      0 24px 50px -30px rgb(11 46 111 / 0.45);
+    overflow: hidden;
+    transform-style: preserve-3d;
+  }
+
+  .card-segmento__brilho {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(240px circle at var(--brilho-x, 50%) var(--brilho-y, 0%), rgb(127 224 234 / 0.28), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .card-segmento:hover .card-segmento__brilho {
+    opacity: 1;
+  }
+
+  .card-segmento__numero {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    font-family: var(--font-titulo);
+    font-weight: 800;
+    font-size: 3.25rem;
+    line-height: 1;
+    color: var(--color-gelo);
+  }
+
+  .card-segmento__icone {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    color: #fff;
+    background: linear-gradient(145deg, var(--color-turquesa), var(--color-azul-tmg));
+    box-shadow: 0 12px 24px -12px rgb(22 96 208 / 0.8);
+  }
+
+  .card-segmento__nome {
+    margin-top: 22px;
+    font-size: 1.5rem;
+    color: var(--color-azul-profundo);
+  }
+
+  .card-segmento__texto {
+    margin-top: 8px;
+    color: var(--color-tinta-suave);
+  }
+
+  .card-segmento__sugestao {
+    margin-top: 16px;
+    margin-bottom: 20px;
+    padding: 10px 14px;
+    border-radius: 14px;
+    background: var(--color-gelo);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-azul-profundo);
+  }
+
+  .card-segmento__sugestao span {
+    display: block;
+    font-family: var(--font-titulo);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-azul-tmg);
+  }
+
+  :global(.card-segmento__botao) {
+    margin-top: auto;
+    min-height: 48px;
+    padding: 12px 14px;
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+
+  .segmentos__pontos {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .segmentos__pontos span {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgb(11 46 111 / 0.2);
+    transition:
+      width 0.3s var(--ease-agua),
+      background-color 0.3s;
+  }
+
+  .segmentos__pontos span.ativo {
+    width: 24px;
+    background: var(--color-azul-tmg);
+  }
+
+  @media (min-width: 640px) {
+    .card-segmento {
+      flex-basis: 46%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .segmentos {
+      padding-top: 72px;
+      padding-bottom: 160px;
+    }
+
+    .segmentos__lista {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      margin-inline: auto;
+      padding: 8px 32px 24px;
+      overflow: visible;
+      perspective: 1000px;
+    }
+
+    .card-segmento {
+      max-width: none;
+    }
+
+    .segmentos__pontos {
+      display: none;
+    }
+  }
+</style>

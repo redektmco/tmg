@@ -1,0 +1,116 @@
+---
+import Logo from './Logo.astro';
+import Icone from './Icone.astro';
+import { linkInstagram, linkWhatsApp, site } from '../lib/site';
+
+const { empresa, rodape } = site;
+const ano = new Date().getFullYear();
+---
+
+<footer class="rodape">
+  <div class="container-site rodape__grade">
+    <div>
+      <a href="#topo" class="rodape__logo" aria-label={`${empresa.nome}, voltar ao topo`}>
+        <Logo />
+      </a>
+      <p class="rodape__descricao">
+        Água Mineral Premium Lindoia e Coca-Cola para comércios em {empresa.cidade} ({empresa.estado}).
+      </p>
+    </div>
+
+    <ul class="rodape__contatos">
+      <li>
+        <a href={linkWhatsApp()} target="_blank" rel="noopener" data-wa="rodape">
+          <Icone nome="whatsapp" tamanho={20} />
+          WhatsApp {empresa.whatsappExibicao}
+        </a>
+      </li>
+      <li>
+        <a href={linkInstagram} target="_blank" rel="noopener" data-instagram="rodape">
+          <Icone nome="instagram" tamanho={20} />
+          @{empresa.instagram}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container-site rodape__base">
+    {
+      (empresa.cnpj || empresa.endereco) && (
+        <p>
+          {empresa.nomeCompleto}
+          {empresa.cnpj && <> · CNPJ {empresa.cnpj}</>}
+          {empresa.endereco && <> · {empresa.endereco}</>}
+        </p>
+      )
+    }
+    <p>{rodape.avisoMarcas}</p>
+    <p>© {ano} {empresa.nome}</p>
+  </div>
+</footer>
+
+<style>
+  .rodape {
+    background: #04122f;
+    color: rgb(255 255 255 / 0.75);
+    padding: 56px 0 calc(32px + var(--safe-bottom) + 72px);
+    font-size: 0.9375rem;
+  }
+
+  .rodape__grade {
+    display: grid;
+    gap: 32px;
+  }
+
+  .rodape__logo {
+    display: inline-flex;
+    padding: 8px 14px 8px 10px;
+    border-radius: 14px;
+    background: #fff;
+  }
+
+  .rodape__descricao {
+    margin-top: 16px;
+    max-width: 26rem;
+  }
+
+  .rodape__contatos {
+    display: grid;
+    gap: 8px;
+    align-content: start;
+  }
+
+  .rodape__contatos a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .rodape__contatos a:hover {
+    color: var(--color-turquesa-claro);
+  }
+
+  .rodape__base {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid rgb(255 255 255 / 0.12);
+    display: grid;
+    gap: 6px;
+    font-size: 0.8125rem;
+    color: rgb(255 255 255 / 0.6);
+  }
+
+  @media (min-width: 768px) {
+    .rodape {
+      padding-bottom: 40px;
+    }
+
+    .rodape__grade {
+      grid-template-columns: 1fr auto;
+      align-items: start;
+    }
+  }
+</style>

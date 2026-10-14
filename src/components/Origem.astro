@@ -1,0 +1,223 @@
+---
+import Onda from './Onda.astro';
+import { site } from '../lib/site';
+
+const { origem } = site;
+const marcas = Array.from({ length: 7 }, (_, i) => Math.round((origem.profundidade / 6) * i));
+---
+
+{
+  origem.mostrar && (
+    <section id="origem" class="origem" aria-labelledby="origem-titulo" data-origem>
+      <Onda cor="var(--color-gelo)" posicao="topo" class="origem__onda" />
+      <div class="origem__palco" data-origem-palco>
+        <div class="origem__fundo origem__fundo--claro" aria-hidden="true" data-origem-claro />
+        <div class="origem__fundo origem__fundo--escuro" aria-hidden="true" />
+        <canvas class="origem__bolhas" data-bolhas="origem" aria-hidden="true" />
+
+        <div class="origem__medidor" aria-hidden="true">
+          <div class="origem__regua">
+            {marcas.map((m) => (
+              <span class="origem__marca">
+                <span>{m} m</span>
+              </span>
+            ))}
+            <span class="origem__indicador" data-origem-indicador />
+          </div>
+        </div>
+
+        <div class="container-site origem__conteudo">
+          <p class="etiqueta origem__etiqueta">{origem.etiqueta}</p>
+          <h2 id="origem-titulo" class="origem__titulo">
+            {origem.titulo}
+          </h2>
+          <p class="origem__profundidade" aria-hidden="true">
+            <span data-origem-contador>{origem.profundidade}</span>
+            <small>m</small>
+          </p>
+          <p class="origem__superficie" aria-hidden="true" data-origem-superficie>
+            {origem.superficie}
+          </p>
+          <p class="origem__texto" data-origem-texto>
+            {origem.texto}
+          </p>
+        </div>
+      </div>
+      <Onda cor="#ffffff" class="origem__onda" />
+    </section>
+  )
+}
+
+<style>
+  .origem {
+    position: relative;
+    color: #fff;
+    background: #030d24;
+  }
+
+  .origem :global(.origem__onda) {
+    z-index: 3;
+  }
+
+  .origem__palco {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .origem__fundo {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  /* Sem efeitos: mostra o estado final (fundo do poço). */
+  .origem__fundo--escuro {
+    background:
+      radial-gradient(60% 40% at 50% 100%, rgb(25 181 200 / 0.25), transparent 70%),
+      linear-gradient(180deg, #0b2e6f 0%, #061a42 60%, #030d24 100%);
+  }
+
+  .origem__fundo--claro {
+    z-index: -1;
+    background:
+      radial-gradient(80% 50% at 50% 0%, rgb(255 255 255 / 0.6), transparent 70%),
+      linear-gradient(180deg, #bdeef4 0%, #19b5c8 45%, #1660d0 100%);
+    opacity: 0;
+  }
+
+  .origem__bolhas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .origem__medidor {
+    position: absolute;
+    left: 16px;
+    top: 15%;
+    bottom: 15%;
+    width: 56px;
+  }
+
+  .origem__regua {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-left: 2px solid rgb(255 255 255 / 0.35);
+  }
+
+  .origem__marca {
+    position: relative;
+    display: block;
+    height: 0;
+  }
+
+  .origem__marca::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -1px;
+    width: 12px;
+    height: 2px;
+    background: rgb(255 255 255 / 0.55);
+  }
+
+  .origem__marca span {
+    position: absolute;
+    left: 18px;
+    top: -0.6em;
+    font-family: var(--font-titulo);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: rgb(255 255 255 / 0.7);
+    white-space: nowrap;
+  }
+
+  .origem__indicador {
+    position: absolute;
+    left: -8px;
+    top: 100%;
+    width: 14px;
+    height: 14px;
+    margin-top: -7px;
+    border-radius: 50%;
+    background: var(--color-turquesa-claro);
+    box-shadow:
+      0 0 0 5px rgb(127 224 234 / 0.25),
+      0 0 24px rgb(127 224 234 / 0.8);
+  }
+
+  .origem__conteudo {
+    position: relative;
+    padding-left: 92px;
+    padding-block: 120px;
+  }
+
+  .origem__etiqueta {
+    color: var(--color-turquesa-claro);
+  }
+
+  .origem__titulo {
+    margin-top: 12px;
+    font-size: clamp(2rem, 8vw, 3.75rem);
+  }
+
+  .origem__profundidade {
+    margin-top: 12px;
+    font-family: var(--font-titulo);
+    font-weight: 800;
+    font-size: clamp(5rem, 26vw, 12rem);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(180deg, #ffffff, var(--color-turquesa-claro));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .origem__profundidade small {
+    font-size: 0.35em;
+    letter-spacing: 0;
+    margin-left: 6px;
+  }
+
+  .origem__superficie {
+    display: none;
+    font-family: var(--font-titulo);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.8rem;
+  }
+
+  .origem__texto {
+    margin-top: 20px;
+    max-width: 30rem;
+    font-size: 1.125rem;
+    color: rgb(255 255 255 / 0.9);
+  }
+
+  @media (min-width: 1024px) {
+    .origem__medidor {
+      left: max(32px, calc((100vw - 1200px) / 2));
+    }
+
+    .origem__conteudo {
+      padding-left: 160px;
+    }
+
+    .origem__texto {
+      font-size: 1.375rem;
+    }
+  }
+</style>

@@ -1,0 +1,37 @@
+---
+interface Props {
+  /** Cor da seção vizinha que a onda "invade". */
+  cor: string;
+  /** base: onda no pé da seção. topo: onda no alto da seção. */
+  posicao?: 'base' | 'topo';
+  class?: string;
+}
+
+const { cor, posicao = 'base', class: classe = '' } = Astro.props;
+---
+
+<div class:list={['onda', `onda--${posicao}`, classe]} aria-hidden="true" data-anima>
+  <svg class="camada-2" viewBox="0 0 2880 100" preserveAspectRatio="none" focusable="false">
+    <path
+      fill={cor}
+      d="M0 45C240 85 480 85 720 45S1200 5 1440 45 1920 85 2160 45 2640 5 2880 45V100H0Z"
+    ></path>
+  </svg>
+  <svg class="camada-1" viewBox="0 0 2880 100" preserveAspectRatio="none" focusable="false">
+    <path
+      fill={cor}
+      d="M0 60C240 20 480 20 720 60S1200 100 1440 60 1920 20 2160 60 2640 100 2880 60V100H0Z"
+    ></path>
+  </svg>
+</div>
+
+<style>
+  .onda--base {
+    bottom: -1px;
+  }
+
+  .onda--topo {
+    top: -1px;
+    transform: rotate(180deg);
+  }
+</style>

@@ -1,0 +1,89 @@
+---
+import { site } from '../lib/site';
+
+const itens = site.segmentos.faixa;
+const rotulo = `Atendemos ${itens.join(', ').toLowerCase()}`;
+---
+
+<div class="faixa" role="img" aria-label={rotulo}>
+  <div class="faixa__fita">
+    <div class="faixa__trilho" data-marquee>
+      {
+        [0, 1, 2, 3].map((copia) => (
+          <div class="faixa__grupo" aria-hidden="true" data-copia={copia}>
+            {itens.map((item) => (
+              <span class="faixa__item">
+                {item}
+                <span class="faixa__gota" />
+              </span>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .faixa {
+    position: relative;
+    z-index: 2;
+    margin-top: -36px;
+    padding-block: 28px 8px;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .faixa__fita {
+    width: 110%;
+    margin-left: -5%;
+    transform: rotate(-3deg);
+    background: linear-gradient(90deg, var(--color-turquesa), var(--color-azul-tmg));
+    box-shadow: 0 18px 40px -20px rgb(11 46 111 / 0.6);
+    overflow: hidden;
+  }
+
+  .faixa__trilho {
+    display: flex;
+    width: max-content;
+    animation: faixa-corre 28s linear infinite;
+    will-change: transform;
+  }
+
+  :global(html.fx) .faixa__trilho {
+    animation: none;
+  }
+
+  .faixa__grupo {
+    display: flex;
+    flex: none;
+  }
+
+  .faixa__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 22px;
+    padding: 14px 0 14px 22px;
+    font-family: var(--font-titulo);
+    font-weight: 800;
+    font-size: clamp(1.25rem, 5vw, 2rem);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  .faixa__gota {
+    width: 12px;
+    height: 16px;
+    background: #fff;
+    clip-path: path('M6 0C6 0 12 7 12 10.3A6 6 0 0 1 0 10.3C0 7 6 0 6 0Z');
+    opacity: 0.85;
+  }
+
+  @keyframes faixa-corre {
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+</style>

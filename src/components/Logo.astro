@@ -1,0 +1,120 @@
+---
+import { Image } from 'astro:assets';
+import { logo, site } from '../lib/site';
+
+interface Props {
+  tamanho?: 'pequeno' | 'grande';
+  class?: string;
+  /** Carregar com prioridade (logo do header). */
+  prioridade?: boolean;
+}
+
+const { tamanho = 'pequeno', class: classe = '', prioridade = false } = Astro.props;
+const imagem = logo();
+const altura = tamanho === 'grande' ? 160 : 44;
+const id = `gota-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+{
+  imagem ? (
+    <Image
+      src={imagem}
+      alt={site.empresa.nomeCompleto}
+      height={altura}
+      densities={[1, 2, 3]}
+      loading={prioridade ? 'eager' : 'lazy'}
+      class:list={['logo-imagem block w-auto', classe]}
+      style={`height:${altura}px`}
+    />
+  ) : (
+    <span class:list={['logo-texto', `logo-texto--${tamanho}`, classe]} role="img" aria-label={site.empresa.nomeCompleto}>
+      <svg class="logo-texto__gota" viewBox="0 0 24 32" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#7fe0ea" />
+            <stop offset="1" stop-color="#1660d0" />
+          </linearGradient>
+        </defs>
+        <path d="M12 1s10 10.6 10 17.6A10 10 0 0 1 2 18.6C2 11.6 12 1 12 1Z" fill={`url(#${id})`} />
+        <path d="M7.5 19a4.5 4.5 0 0 0 4.5 4.5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".8" />
+      </svg>
+      <span class="logo-texto__marca">TMG</span>
+      <span class="logo-texto__descricao">
+        Distribuidora
+        <small>de águas e bebidas</small>
+      </span>
+    </span>
+  )
+}
+
+<style>
+  .logo-texto {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-azul-profundo);
+    line-height: 1;
+  }
+
+  .logo-texto__gota {
+    width: 18px;
+    height: 24px;
+    flex: none;
+  }
+
+  .logo-texto__marca {
+    font-family: var(--font-titulo);
+    font-weight: 800;
+    font-style: italic;
+    font-size: 1.6rem;
+    letter-spacing: -0.04em;
+    background: linear-gradient(180deg, #2a7be6, #0b3f9a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-right: 2px;
+  }
+
+  .logo-texto__descricao {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-titulo);
+    font-weight: 800;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-azul-profundo);
+  }
+
+  .logo-texto__descricao small {
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--color-azul-tmg);
+    margin-top: 2px;
+  }
+
+  .logo-texto--grande {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .logo-texto--grande .logo-texto__gota {
+    width: 40px;
+    height: 54px;
+  }
+
+  .logo-texto--grande .logo-texto__marca {
+    font-size: 4rem;
+  }
+
+  .logo-texto--grande .logo-texto__descricao {
+    font-size: 1rem;
+    align-items: center;
+  }
+
+  .logo-texto--grande .logo-texto__descricao small {
+    font-size: 0.72rem;
+  }
+</style>

@@ -1,0 +1,29 @@
+---
+import { site } from '../lib/site';
+
+const { provaSocial } = site;
+const depoimentos = provaSocial.depoimentos.filter((d) => d.texto.trim() && d.nome.trim());
+---
+
+{
+  provaSocial.mostrar && depoimentos.length > 0 && (
+    <section id="clientes" class="secao bg-white" aria-labelledby="clientes-titulo">
+      <div class="container-site">
+        <h2 id="clientes-titulo" class="titulo-secao" data-split>
+          {provaSocial.titulo}
+        </h2>
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
+          {depoimentos.map((d) => (
+            <figure class="rounded-3xl bg-gelo p-6" data-revela>
+              <blockquote class="text-lg text-tinta">“{d.texto}”</blockquote>
+              <figcaption class="mt-4 font-titulo font-bold text-azul-profundo">
+                {d.nome}
+                {d.comercio && <span class="block text-sm font-medium text-tinta-suave">{d.comercio}</span>}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
