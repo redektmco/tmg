@@ -166,7 +166,8 @@ const { segmentos } = site;
     min-height: 48px;
     padding: 12px 14px;
     font-size: 0.875rem;
-    white-space: nowrap;
+    line-height: 1.2;
+    text-wrap: balance;
   }
 
   .segmentos__pontos {
@@ -204,7 +205,7 @@ const { segmentos } = site;
 
     .segmentos__lista {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 20px;
       max-width: 1200px;
       margin-inline: auto;
@@ -219,6 +220,16 @@ const { segmentos } = site;
 
     .segmentos__pontos {
       display: none;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .segmentos__lista {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .card-segmento {
+      padding: 26px 20px 20px;
     }
   }
 </style>

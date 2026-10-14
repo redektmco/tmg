@@ -9,7 +9,7 @@ const marcas = Array.from({ length: 7 }, (_, i) => Math.round((origem.profundida
 {
   origem.mostrar && (
     <section id="origem" class="origem" aria-labelledby="origem-titulo" data-origem>
-      <Onda cor="var(--color-gelo)" posicao="topo" class="origem__onda" />
+      <Onda cor="var(--color-gelo)" espuma="var(--color-turquesa-claro)" posicao="topo" class="origem__onda" />
       <div class="origem__palco" data-origem-palco>
         <div class="origem__fundo origem__fundo--claro" aria-hidden="true" data-origem-claro />
         <div class="origem__fundo origem__fundo--escuro" aria-hidden="true" />
@@ -84,8 +84,8 @@ const marcas = Array.from({ length: 7 }, (_, i) => Math.round((origem.profundida
   .origem__fundo--claro {
     z-index: -1;
     background:
-      radial-gradient(80% 50% at 50% 0%, rgb(255 255 255 / 0.6), transparent 70%),
-      linear-gradient(180deg, #bdeef4 0%, #19b5c8 45%, #1660d0 100%);
+      radial-gradient(80% 45% at 50% 0%, rgb(255 255 255 / 0.35), transparent 70%),
+      linear-gradient(180deg, #1aa3bd 0%, #1683c9 45%, #1660d0 100%);
     opacity: 0;
   }
 
@@ -163,7 +163,7 @@ const marcas = Array.from({ length: 7 }, (_, i) => Math.round((origem.profundida
   }
 
   .origem__etiqueta {
-    color: var(--color-turquesa-claro);
+    color: rgb(255 255 255 / 0.9);
   }
 
   .origem__titulo {

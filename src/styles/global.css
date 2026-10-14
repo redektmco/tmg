@@ -278,6 +278,10 @@ html.fx [data-revela] {
   transform: translate3d(0, 28px, 0);
 }
 
+html.fx [data-split]:not(.dividido) {
+  opacity: 0;
+}
+
 /* Movimento reduzido: tudo parado, só fades simples */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -313,4 +317,47 @@ html.lenis body {
 
 .lenis.lenis-stopped {
   overflow: hidden;
+}
+
+/* Cursor em forma de gota (só desktop com mouse) */
+html.com-cursor,
+html.com-cursor * {
+  cursor: none !important;
+}
+
+.cursor-gota {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 95;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cursor-gota--visivel {
+  opacity: 1;
+}
+
+.cursor-gota span {
+  display: block;
+  width: 20px;
+  height: 27px;
+  margin: -2px 0 0 -10px;
+  background: linear-gradient(180deg, rgb(127 224 234 / 0.95), rgb(22 96 208 / 0.95));
+  clip-path: path('M10 0C10 0 20 11.5 20 17A10 10 0 0 1 0 17C0 11.5 10 0 10 0Z');
+  transform-origin: 50% 65%;
+  transition:
+    transform 0.35s var(--ease-agua),
+    opacity 0.25s ease;
+  box-shadow: inset 0 0 0 2px rgb(255 255 255 / 0.6);
+}
+
+.cursor-gota--link span {
+  transform: scale(1.7);
+  opacity: 0.55;
+}
+
+.cursor-gota--clique span {
+  transform: scale(0.8);
 }

@@ -84,7 +84,6 @@ function carregarRastreamento() {
     document.head.appendChild(script);
     window.dataLayer = window.dataLayer || [];
     window.gtag = function gtag() {
-      // eslint-disable-next-line prefer-rest-params
       window.dataLayer.push(arguments);
     };
     window.gtag('js', new Date());
@@ -313,3 +312,5 @@ if (!reduzMovimento) {
       document.documentElement.classList.remove('fx');
     });
 }
+
+export {};
