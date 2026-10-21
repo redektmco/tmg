@@ -23,60 +23,56 @@ const catalogo = itens.map((item) => {
 });
 ---
 
-{
-  catalogo.length > 0 && (
-    <section id="produtos" class="secao produtos" aria-labelledby="produtos-titulo">
-      <div class="container-site">
-        <div class="produtos__cabecalho">
-          <div class="produtos__intro">
-            <p class="etiqueta produtos__etiqueta" data-revela>{produtos.etiqueta}</p>
-            <h2 id="produtos-titulo" class="titulo-secao" data-split>{produtos.titulo}</h2>
-            <p class="produtos__subtitulo" data-revela>{produtos.subtitulo}</p>
-          </div>
-          <a href={produtos.fonte} target="_blank" rel="noopener noreferrer" class="produtos__fonte">
-            Catálogo Premium Lindoia <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-
-        <ul class="produtos__grade" role="list">
-          {catalogo.map((item) => (
-            <li class="produto" data-revela>
-              <div class="produto__visual">
-                <Image
-                  src={item.imagem}
-                  alt={item.imagemAlt}
-                  widths={[240, 400, 600]}
-                  sizes="(min-width: 1024px) 260px, (min-width: 640px) 44vw, 85vw"
-                  format="webp"
-                  loading="lazy"
-                  decoding="async"
-                  class="produto__imagem"
-                />
-              </div>
-              <div class="produto__conteudo">
-                <p class="produto__apresentacao">{item.apresentacao}</p>
-                <h3 class="produto__nome">{item.nome}</h3>
-                <p class="produto__descricao">{item.descricao}</p>
-                <BotaoWhatsApp
-                  origem={`produto-${item.id}`}
-                  texto={produtos.botaoProduto}
-                  mensagem={`Olá, TMG! Quero consultar ${item.nome} (${item.apresentacao}) para o meu pedido.`}
-                  class="produto__botao"
-                  magnetico={false}
-                />
-              </div>
-            </li>
-          ))}
-        </ul>
-
-        <div class="produtos__rodape" data-revela>
-          <p>{produtos.aviso}</p>
-          <BotaoWhatsApp origem="produtos" texto={produtos.botao} magnetico={false} />
-        </div>
+<section id="produtos" class="secao produtos" aria-labelledby="produtos-titulo">
+  <div class="container-site">
+    <div class="produtos__cabecalho">
+      <div class="produtos__intro">
+        <p class="etiqueta produtos__etiqueta" data-revela>{produtos.etiqueta}</p>
+        <h2 id="produtos-titulo" class="titulo-secao" data-split>{produtos.titulo}</h2>
+        <p class="produtos__subtitulo" data-revela>{produtos.subtitulo}</p>
       </div>
-    </section>
-  )
-}
+      <a href={produtos.fonte} target="_blank" rel="noopener noreferrer" class="produtos__fonte">
+        Catálogo Premium Lindoia <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+    {catalogo.length > 0 && <ul class="produtos__grade" role="list">
+      {catalogo.map((item) => (
+        <li class="produto" data-revela>
+          <div class="produto__visual">
+            <Image
+              src={item.imagem}
+              alt={item.imagemAlt}
+              widths={[240, 400, 600]}
+              sizes="(min-width: 1024px) 260px, (min-width: 640px) 44vw, 85vw"
+              format="webp"
+              loading="lazy"
+              decoding="async"
+              class="produto__imagem"
+            />
+          </div>
+          <div class="produto__conteudo">
+            <p class="produto__apresentacao">{item.apresentacao}</p>
+            <h3 class="produto__nome">{item.nome}</h3>
+            <p class="produto__descricao">{item.descricao}</p>
+            <BotaoWhatsApp
+              origem={`produto-${item.id}`}
+              texto={produtos.botaoProduto}
+              mensagem={`Olá, TMG! Quero consultar ${item.nome} (${item.apresentacao}) para o meu pedido.`}
+              class="produto__botao"
+              magnetico={false}
+            />
+          </div>
+        </li>
+      ))}
+    </ul>}
+
+    <div class="produtos__rodape" data-revela>
+      <p>{produtos.aviso}</p>
+      <BotaoWhatsApp origem="produtos" texto={produtos.botao} magnetico={false} />
+    </div>
+  </div>
+</section>
 
 <style>
   .produtos {
