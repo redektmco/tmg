@@ -43,13 +43,7 @@
   },
 
   "produtos": {
-    "etiqueta": "Linha Premium Lindoia",
-    "titulo": "Linha de produtos Premium Lindoia",
-    "subtitulo": "Conheça a linha de produtos Premium Lindoia e consulte a TMG para montar seu pedido.",
-    "fonte": "https://www.premiumlindoia.com.br/produtos-premium",
-    "botaoProduto": "Consultar produto",
-    "aviso": "Consulte disponibilidade, condições e quantidades pelo WhatsApp. A equipe TMG ajuda você a escolher os produtos para o seu comércio.",
-    "botao": "Montar meu pedido",
+    "titulo": "NOSSOS PRODUTOS",
     "itens": []
   },
 
