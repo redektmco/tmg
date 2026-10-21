@@ -1,0 +1,239 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import BotaoWhatsApp from './BotaoWhatsApp.astro';
+import { site } from '../lib/site';
+
+interface Produto {
+  id: string;
+  nome: string;
+  apresentacao: string;
+  descricao: string;
+  imagem: string;
+  imagemAlt: string;
+}
+
+const { produtos } = site;
+const itens: Produto[] = produtos.itens;
+const imagens = import.meta.glob<{ default: ImageMetadata }>('../assets/produtos/*.{png,jpg,jpeg,webp,avif}', { eager: true });
+const catalogo = itens.map((item) => {
+  const imagem = imagens[`../assets/produtos/${item.imagem}`]?.default;
+  if (!imagem) throw new Error(`Imagem do produto "${item.nome}" não encontrada: ${item.imagem}`);
+  return { ...item, imagem };
+});
+---
+
+{
+  catalogo.length > 0 && (
+    <section id="produtos" class="secao produtos" aria-labelledby="produtos-titulo">
+      <div class="container-site">
+        <div class="produtos__cabecalho">
+          <div class="produtos__intro">
+            <p class="etiqueta produtos__etiqueta" data-revela>{produtos.etiqueta}</p>
+            <h2 id="produtos-titulo" class="titulo-secao" data-split>{produtos.titulo}</h2>
+            <p class="produtos__subtitulo" data-revela>{produtos.subtitulo}</p>
+          </div>
+          <a href={produtos.fonte} target="_blank" rel="noopener noreferrer" class="produtos__fonte">
+            Catálogo Premium Lindoia <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <ul class="produtos__grade" role="list">
+          {catalogo.map((item) => (
+            <li class="produto" data-revela>
+              <div class="produto__visual">
+                <Image
+                  src={item.imagem}
+                  alt={item.imagemAlt}
+                  widths={[240, 400, 600]}
+                  sizes="(min-width: 1024px) 260px, (min-width: 640px) 44vw, 85vw"
+                  format="webp"
+                  loading="lazy"
+                  decoding="async"
+                  class="produto__imagem"
+                />
+              </div>
+              <div class="produto__conteudo">
+                <p class="produto__apresentacao">{item.apresentacao}</p>
+                <h3 class="produto__nome">{item.nome}</h3>
+                <p class="produto__descricao">{item.descricao}</p>
+                <BotaoWhatsApp
+                  origem={`produto-${item.id}`}
+                  texto={produtos.botaoProduto}
+                  mensagem={`Olá, TMG! Quero consultar ${item.nome} (${item.apresentacao}) para o meu pedido.`}
+                  class="produto__botao"
+                  magnetico={false}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <div class="produtos__rodape" data-revela>
+          <p>{produtos.aviso}</p>
+          <BotaoWhatsApp origem="produtos" texto={produtos.botao} magnetico={false} />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .produtos {
+    background: var(--color-gelo);
+  }
+
+  .produtos__cabecalho {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+
+  .produtos__intro {
+    max-width: 42rem;
+  }
+
+  .produtos__etiqueta {
+    margin-bottom: 12px;
+    color: var(--color-azul-tmg);
+  }
+
+  .produtos__subtitulo {
+    margin-top: 16px;
+    font-size: 1.125rem;
+    color: var(--color-tinta-suave);
+  }
+
+  .produtos__fonte {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    color: var(--color-azul-profundo);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .produtos__grade {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .produto {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgb(11 46 111 / 0.08);
+    border-radius: 28px;
+    background: #fff;
+    box-shadow: 0 20px 45px -35px rgb(11 46 111 / 0.4);
+  }
+
+  .produto__visual {
+    display: grid;
+    place-items: center;
+    height: 260px;
+    margin: 12px 12px 0;
+    padding: 24px;
+    border-radius: 20px;
+    background: radial-gradient(ellipse at 50% 65%, #fff 20%, var(--color-gelo) 100%);
+  }
+
+  .produto__imagem {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: contain;
+    transition: transform 0.4s var(--ease-agua);
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .produto:hover .produto__imagem {
+      transform: translateY(-6px) rotate(-2deg);
+    }
+  }
+
+  .produto__conteudo {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+  }
+
+  .produto__apresentacao {
+    margin-bottom: 10px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--color-gelo);
+    color: var(--color-azul-tmg);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .produto__nome {
+    color: var(--color-azul-profundo);
+    font-size: 1.25rem;
+    line-height: 1.25;
+  }
+
+  .produto__descricao {
+    margin-top: 10px;
+    margin-bottom: 24px;
+    color: var(--color-tinta-suave);
+    font-size: 0.9375rem;
+  }
+
+  :global(.produto__botao) {
+    width: 100%;
+    margin-top: auto;
+    padding-inline: 14px;
+    font-size: 0.875rem;
+  }
+
+  .produtos__rodape {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid rgb(11 46 111 / 0.12);
+  }
+
+  .produtos__rodape p {
+    max-width: 35rem;
+    color: var(--color-tinta-suave);
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 640px) {
+    .produtos__grade {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .produtos__grade {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .produto__visual {
+      height: 240px;
+    }
+
+    .produto__conteudo {
+      padding: 24px 20px;
+    }
+  }
+</style>

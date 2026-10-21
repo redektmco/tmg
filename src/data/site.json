@@ -42,6 +42,17 @@
     "botaoSecundario": "Como funciona"
   },
 
+  "produtos": {
+    "etiqueta": "Linha Premium Lindoia",
+    "titulo": "A água certa para cada momento do seu negócio.",
+    "subtitulo": "Conheça a linha de produtos Premium Lindoia e consulte a TMG para montar seu pedido.",
+    "fonte": "https://www.premiumlindoia.com.br/produtos-premium",
+    "botaoProduto": "Consultar produto",
+    "aviso": "Consulte disponibilidade, condições e quantidades pelo WhatsApp. A equipe TMG ajuda você a escolher os produtos para o seu comércio.",
+    "botao": "Montar meu pedido",
+    "itens": []
+  },
+
   "segmentos": {
     "faixa": ["Bares", "Restaurantes", "Padarias", "Centros de eventos"],
     "titulo": "Feito para o seu tipo de comércio",
