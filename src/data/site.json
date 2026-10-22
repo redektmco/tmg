@@ -43,8 +43,51 @@
   },
 
   "produtos": {
-    "titulo": "NOSSOS PRODUTOS",
-    "itens": []
+    "etiqueta": "Linha Premium Lindoia",
+    "titulo": "Água para cada momento do seu negócio",
+    "subtitulo": "Dos copinhos para eventos às latas para o balcão. Conheça os formatos e escolha o que combina com o seu pedido.",
+    "fonte": "https://www.premiumlindoia.com.br/produtos-premium",
+    "botao": "Pedir no WhatsApp",
+    "_imagens": "Fotos oficiais do catálogo Premium Lindoia, salvas em src/assets/produtos/. Volumes e sabores conforme o catálogo do fabricante.",
+    "itens": [
+      {
+        "nome": "Copinhos e garrafinhas",
+        "apresentacao": "200 ml / 305 ml / 310 ml",
+        "descricao": "Formatos práticos para recepções, cafés e eventos.",
+        "imagem": "copinhos.jpg",
+        "imagemAlt": "Copinhos de água mineral Premium Lindoia",
+        "imagemComplementar": "garrafinhas.jpg",
+        "imagemComplementarAlt": "Garrafinhas de água mineral Premium Lindoia"
+      },
+      {
+        "nome": "Latinhas",
+        "apresentacao": "355 ml · com e sem gás",
+        "descricao": "Água mineral em lata para servir em bares, festas e encontros.",
+        "imagem": "latinhas.jpg",
+        "imagemAlt": "Latas de água mineral Premium Lindoia"
+      },
+      {
+        "nome": "Garrafinhas e garrafas",
+        "apresentacao": "510 ml / 1,5 L",
+        "descricao": "Para acompanhar a refeição ou compartilhar à mesa.",
+        "imagem": "garrafas.jpg",
+        "imagemAlt": "Garrafinha e garrafa de água mineral Premium Lindoia"
+      },
+      {
+        "nome": "Premium Lindoia Flavors",
+        "apresentacao": "355 ml · com gás",
+        "descricao": "Latas saborizadas de limão, uva e maracujá.",
+        "imagem": "flavors.jpg",
+        "imagemAlt": "Latas Premium Lindoia Flavors nos sabores limão, uva e maracujá"
+      },
+      {
+        "nome": "Garrafa Sport",
+        "apresentacao": "1 L · sem gás",
+        "descricao": "Garrafa com bico sport para treinos e uma rotina em movimento.",
+        "imagem": "sport.jpg",
+        "imagemAlt": "Garrafa de água mineral Premium Lindoia Sport com bico sport"
+      }
+    ]
   },
 
   "segmentos": {
