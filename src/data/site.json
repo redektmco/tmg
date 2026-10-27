@@ -43,9 +43,9 @@
   },
 
   "produtos": {
-    "etiqueta": "Linha Premium Lindoia",
-    "titulo": "Água para cada momento do seu negócio",
-    "subtitulo": "Dos copinhos para eventos às latas para o balcão. Conheça os formatos e escolha o que combina com o seu pedido.",
+    "etiqueta": "Água Premium Lindoia e Coca-Cola",
+    "titulo": "Bebidas para cada momento do seu negócio",
+    "subtitulo": "Da água em copinhos e latas à Coca-Cola para o balcão. Conheça os produtos e escolha o que combina com o seu pedido.",
     "fonte": "https://www.premiumlindoia.com.br/produtos-premium",
     "botao": "Pedir no WhatsApp",
     "_imagens": "Fotos oficiais do catálogo Premium Lindoia, salvas em src/assets/produtos/. Volumes e sabores conforme o catálogo do fabricante.",
@@ -86,6 +86,20 @@
         "descricao": "Garrafa com bico sport para treinos e uma rotina em movimento.",
         "imagem": "sport.jpg",
         "imagemAlt": "Garrafa de água mineral Premium Lindoia Sport com bico sport"
+      },
+      {
+        "nome": "Coca-Cola",
+        "apresentacao": "Garrafa PET · Original",
+        "descricao": "O clássico para o balcão, a mesa e a geladeira do seu comércio.",
+        "imagem": "coca-cola.jpg",
+        "imagemAlt": "Fardo e garrafa PET de Coca-Cola Original"
+      },
+      {
+        "nome": "Coca-Cola Zero",
+        "apresentacao": "Garrafa PET · Sem açúcar",
+        "descricao": "O mesmo sabor da Coca-Cola, sem açúcar.",
+        "imagem": "coca-cola-zero.jpg",
+        "imagemAlt": "Fardo e garrafa PET de Coca-Cola Sem Açúcar"
       }
     ]
   },
