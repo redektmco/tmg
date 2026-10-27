@@ -43,12 +43,16 @@
   },
 
   "produtos": {
-    "etiqueta": "Linha Premium Lindoia",
+    "etiqueta": "Premium Lindoia e Coca-Cola",
     "titulo": "Água para cada momento do seu negócio",
-    "subtitulo": "Dos copinhos para eventos às latas para o balcão. Conheça os formatos e escolha o que combina com o seu pedido.",
+    "subtitulo": "Água mineral em diferentes formatos e Coca-Cola Original ou Zero Açúcar em lata. Escolha o que combina com o seu pedido.",
     "fonte": "https://www.premiumlindoia.com.br/produtos-premium",
     "botao": "Pedir no WhatsApp",
-    "_imagens": "Fotos oficiais do catálogo Premium Lindoia, salvas em src/assets/produtos/. Volumes e sabores conforme o catálogo do fabricante.",
+    "_imagens": "Fotos da Premium Lindoia conforme o catálogo do fabricante e fotos das latas Coca-Cola do catálogo Imigrantes Bebidas, salvas em src/assets/produtos/.",
+    "_fontesCocaCola": [
+      "https://www.imigrantesbebidas.com.br/refrigerante-coca-cola-lata-350ml",
+      "https://www.imigrantesbebidas.com.br/refrigerante-coca-cola-sem-acucar-lata-350ml-1"
+    ],
     "itens": [
       {
         "nome": "Copinhos e garrafinhas",
@@ -86,6 +90,22 @@
         "descricao": "Garrafa com bico sport para treinos e uma rotina em movimento.",
         "imagem": "sport.jpg",
         "imagemAlt": "Garrafa de água mineral Premium Lindoia Sport com bico sport"
+      },
+      {
+        "nome": "Coca-Cola Original",
+        "apresentacao": "350 ml · lata",
+        "descricao": "O sabor original da Coca-Cola para acompanhar refeições e abastecer o balcão.",
+        "imagem": "coca-cola-original-lata.jpg",
+        "imagemAlt": "Lata de Coca-Cola Sabor Original de 350 ml",
+        "imagemContida": true
+      },
+      {
+        "nome": "Coca-Cola Zero Açúcar",
+        "apresentacao": "350 ml · lata",
+        "descricao": "Coca-Cola sem açúcar em lata para oferecer mais uma opção aos seus clientes.",
+        "imagem": "coca-cola-zero-lata.jpg",
+        "imagemAlt": "Lata de Coca-Cola Zero Açúcar de 350 ml",
+        "imagemContida": true
       }
     ]
   },

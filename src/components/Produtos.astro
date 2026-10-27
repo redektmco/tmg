@@ -11,6 +11,7 @@ interface Produto {
   descricao: string;
   imagem: string;
   imagemAlt: string;
+  imagemContida?: boolean;
   imagemComplementar?: string;
   imagemComplementarAlt?: string;
 }
@@ -36,7 +37,10 @@ function imagem(arquivo: string): ImageMetadata {
     <ul class="produtos__grade" role="list">
       {itens.map((item) => (
         <li class="produto">
-          <div class:list={['produto__visual', { 'produto__visual--duplo': item.imagemComplementar }]}>
+          <div class:list={['produto__visual', {
+            'produto__visual--duplo': item.imagemComplementar,
+            'produto__visual--contido': item.imagemContida,
+          }]}>
             <Image
               src={imagem(item.imagem)}
               alt={item.imagemAlt}
@@ -132,6 +136,15 @@ function imagem(arquivo: string): ImageMetadata {
 
   .produto__visual--duplo :global(img) {
     width: 50%;
+  }
+
+  .produto__visual--contido {
+    padding: 20px;
+    background: #fff;
+  }
+
+  .produto__visual--contido :global(img) {
+    object-fit: contain;
   }
 
   .produto__conteudo {
