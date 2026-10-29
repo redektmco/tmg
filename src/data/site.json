@@ -228,11 +228,12 @@
     "respostaPadrao": "Chama no WhatsApp que a gente te responde na hora.",
     "botao": "Perguntar no WhatsApp",
     "perguntas": [
-      { "pergunta": "Qual o pedido mínimo?", "resposta": "" },
-      { "pergunta": "Quais regiões de São Paulo vocês atendem?", "resposta": "" },
-      { "pergunta": "Em quanto tempo a entrega chega?", "resposta": "" },
-      { "pergunta": "Quais as formas de pagamento?", "resposta": "" },
-      { "pergunta": "Vocês atendem eventos pontuais?", "resposta": "" }
+      { "pergunta": "Qual o pedido mínimo?", "resposta": "O pedido é montado de acordo com o consumo do seu comércio. Chame no WhatsApp e o vendedor passa as condições para o seu volume." },
+      { "pergunta": "Quais regiões de São Paulo vocês atendem?", "resposta": "Atendemos a zona sul de São Paulo. Se o seu comércio fica em outra região, chame no WhatsApp para ver se ele entra na nossa rota." },
+      { "pergunta": "Em quanto tempo a entrega chega?", "resposta": "Em até 48 horas. Na maioria dos pedidos, a entrega chega no dia seguinte. Se for urgente, dependendo da região, a gente encaixa na rota do mesmo dia." },
+      { "pergunta": "Quais as formas de pagamento?", "resposta": "Pix e boleto." },
+      { "pergunta": "Vocês atendem eventos pontuais?", "resposta": "Sim. Atendemos feiras e eventos com entrega agendada e atendimento de urgência. Mande no WhatsApp a data, o local e a quantidade." },
+      { "pergunta": "Dá para receber toda semana?", "resposta": "Sim. A maioria dos nossos clientes pede toda semana. A gente acompanha o seu consumo e avisa antes do estoque acabar." }
     ]
   },
 
